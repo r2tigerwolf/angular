@@ -48,17 +48,14 @@
             $sql = "UPDATE `" . DB_NAME . "`.`" . TABLE_NAME . "` set firstname = '" . $obj['firstname'] ."', lastname = '" . $obj['lastname'] . "', comment = '" . $obj['comment'] . "' where id = ". $obj['id'];
             $sqlArray = array('conn' => $guestConn, 'rows' => 'id, firstname, lastname, comment', 'table' => TABLE_NAME);
             $routeResult = $guest->updateguest($sqlArray, $obj['id'], $obj['firstname'], $obj['lastname'], $obj['comment']); 
-
             break;       
     
         case "post":        
             $sqlArray = array('conn' => $guestConn, 'rows' => 'id, firstname, lastname, comment', 'table' => TABLE_NAME);
             $routeResult = $guest->insertguest($sqlArray, $obj['id'], $obj['firstname'], $obj['lastname'], $obj['comment']);
-            
             break;
     
         case "delete":
-            // logic for DELETE here
             $sql = "DELETE FROM `" . DB_NAME . "`.`" . TABLE_NAME . "` where id = " . $obj['id'];
             $guestConn->query($sql);
             break;

@@ -5,12 +5,12 @@ app.run(function(editableOptions) {
 });
 
 app.controller('guestbookCtrl', function($scope, $http) {
-    var baseurl = "http://localhost/rubber/angular/rest/";
+    var baseurl = "http://localhost/rubber/angular/rest/access_rest.php";
     populate();
 
     // GET
     function populate() {
-        $http.get(baseurl + "get.php")
+        $http.get(baseurl + '/get')
         .then(function (response) {
             $scope.commentContent = 'some comment';
             $scope.guestbook = response.data.records;
@@ -28,7 +28,7 @@ app.controller('guestbookCtrl', function($scope, $http) {
                 'lastname' : $scope.guestbook[$index].lastname,
                 'comment' : $scope.guestbook[$index].comment
             },
-            url: baseurl + 'put.php',
+            url: baseurl + '/put',
             headers : {'Content-Type': 'application/json'} 
         });
 	};
@@ -43,7 +43,7 @@ app.controller('guestbookCtrl', function($scope, $http) {
                 'lastname' : field.lastname,
                 'comment' : field.comment
             },
-            url: baseurl 
+            url: baseurl + '/post'
         }).then(function(response) {
             
             //$scope.guestbook.push({'firstname' : field.firstname, 'lastname' : field.lastname, 'comment' : field.comment}); 
@@ -59,7 +59,7 @@ app.controller('guestbookCtrl', function($scope, $http) {
             data: {
                 'id' : $scope.guestbook[$index].id
             },
-            url: baseurl + 'delete.php',
+            url: baseurl + '/delete',
             headers : {'Content-Type': 'application/json'} 
         }).then(function(response) {
             $scope.guestbook.pop(); 

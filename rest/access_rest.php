@@ -7,6 +7,9 @@
     $ch = curl_init('http://localhost/rubber/angular/rest/rest.php');
     
     switch( $method ) {
+        case "get":
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+            break;
         case "put":
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
             break;
@@ -15,9 +18,6 @@
             break;
         case "delete":
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
-            break;
-        default:
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
             break;
     }
     

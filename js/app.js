@@ -12,7 +12,7 @@ app.controller('guestbookCtrl', function($scope, $http) {
     function populate() {
         $http.get(baseurl + '/get')
         .then(function (response) {
-            $scope.commentContent = 'some comment';
+            $scope.commentContent = 'Initial comment.  Click on the first name to view the comments.';
             $scope.guestbook = response.data.records;
         });
     }
@@ -53,7 +53,7 @@ app.controller('guestbookCtrl', function($scope, $http) {
     
     // DELETE
     $scope.deleteGuestbook = function ($index, field) {
-        console.log($scope.guestbook[$index].id);
+        //console.log($scope.guestbook[$index].id);
         $http({
             method: 'POST',
             data: {

@@ -16,7 +16,7 @@
     padding: 10px;
     font-family: Arial, Helvetica;
     color: #000;
-    width: 600px;
+
 }
 .guestbook-info a {
     color: #000;
@@ -28,7 +28,18 @@
 .guestbook-info:nth-child(even){
     background:#ccc;
 }
-.delete {
+.delete form {
     float: right;
 }
 div[ng-app] { margin: 50px; }
+.main-col{
+    background: #ccc;
+    padding: 20px;
+}
+.form-label {
+    color: #000040;
+}
+.form-element textarea{
+    width: 400px;
+    height: 100px;
+}

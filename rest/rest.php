@@ -3,14 +3,19 @@
     header("Content-Type: application/json; charset=UTF-8");
     define("DB_NAME", "angular");
     define("TABLE_NAME", "guestbook");
+    
+    include("AntiXSS.php");        
     include("db.class.php");
+    
+    $antixss = new AntiXSS;
+                
     
     $conn = new Connect();
     $guestConn = $conn->dbconnect();
     
     $guest = new Guest; 
     
-     $part = explode ("/", $_SERVER['REQUEST_URI']);
+    $part = explode ("/", $_SERVER['REQUEST_URI']);
     $where = "";
     $id = end($part);   
     
@@ -50,9 +55,12 @@
             $routeResult = $guest->updateguest($sqlArray, $obj['id'], $obj['firstname'], $obj['lastname'], $obj['comment']); 
             break;       
     
-        case "post":        
+        case "post":
+            $firstname = $antixss->setFilter($obj['firstname'], "", "", 0);        
+            $lastname = $antixss->setFilter($obj['lastname'], "", "", 0);
+            $comment = $antixss->setFilter($obj['comment'], "", "", 0);                    
             $sqlArray = array('conn' => $guestConn, 'rows' => 'id, firstname, lastname, comment', 'table' => TABLE_NAME);
-            $routeResult = $guest->insertguest($sqlArray, $obj['id'], $obj['firstname'], $obj['lastname'], $obj['comment']);
+            $routeResult = $guest->insertguest($sqlArray, $obj['id'], $firstname, $lastname, $comment);
             break;
     
         case "delete":

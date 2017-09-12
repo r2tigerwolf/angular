@@ -4,10 +4,14 @@
 
 .firstname, .lastname {
     float: left;
-    width: 200px;
 }
 .lastname {
     margin-left: 20px;
+    width: 300px;
+}
+.delete {
+    display: inline;
+    width: auto;
 }
 .clear {
     clear: both;
